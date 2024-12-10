@@ -8,6 +8,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReservationController;
+use App\Models\About;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
     Route::get('/admin/about', [AboutController::class, 'view'])->name('admin.about');
+    Route::resource('admin/about', AboutController::class);
 });
 
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('login');

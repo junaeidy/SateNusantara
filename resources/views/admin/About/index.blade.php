@@ -10,7 +10,7 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">About Pages</h6>
         <div class="float-right">
-            <a href="#" class="btn btn-primary">New</a>
+            <a href="{{route('about.create')}}" class="btn btn-primary">New</a>
         </div>
     </div>
     <div class="card-body">
@@ -35,13 +35,16 @@
                     </tr>
                 </tfoot>
                 <tbody>
+                    @foreach ($abouts as $about)
+                        
                     <tr>
-                        <td>11</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>Blobololblb</td>
+                        <td>{{ $key+1 }}</td>
+                        <td>{{ $about->title }}</td>
+                        <td>{{ $about->content }}</td>
+                        <td><img src="{{ asset('storage/' .$about->image) }}" alt="{{ $about->name }}"></td>
                         <td><a href="#" class="btn btn-warning">Edit</a> | <a href="#" class="btn btn-danger">Delete</a></td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
