@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
     Route::get('/admin/about', [AboutController::class, 'view'])->name('admin.about');
+    Route::get('/admin/about/create', [AboutController::class, 'create'])->name('about.create');
+    Route::post('/admin/about', [AboutController::class, 'store'])->name('about.store');
 });
 
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('login');

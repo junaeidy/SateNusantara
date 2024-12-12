@@ -1,8 +1,12 @@
 <section id="gtco-welcome" class="bg-white section-padding">
+    @foreach ($abouts as $about)
     <div class="container">
         <div class="section-content">
             <div class="row">
-                <div class="col-sm-5 img-bg d-flex shadow align-items-center justify-content-center justify-content-md-end img-2" style="background-image: url(assets/img/hero-2.jpg);">
+                <div class="col-sm-5 img-bg d-flex shadow align-items-center justify-content-center justify-content-md-end img-2">
+                    @if ($about->image_path)
+                        <img src="{{ asset('storage/' .$about->image_path) }}" alt="{{ $about->title }}" class="img-fluid">
+                    @endif
                     
                 </div>
                 <div class="col-sm-7 py-5 pl-md-0 pl-4">
@@ -11,11 +15,11 @@
                             About
                         </span>
                         <h2>
-                            Welcome to Resto
+                            {{$about->title}}
                         </h2>
                     </div>
                     <div class="pl-lg-5 ml-md-5">
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p>{{$about->content}}</p>
                         <h3 class="mt-5">Special Recipe</h3>
                         <div class="row">
                             <div class="col-4">
@@ -42,4 +46,6 @@
             </div>
         </div>
     </div>
+    @endforeach
+    
 </section>
