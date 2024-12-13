@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
     public function index(){
         $abouts = About::all();
-        return view('about-us', ['abouts' => $abouts]);
+        $recipes = Menu::where('category', 'recipe')->get();
+        $special = Menu::where('category', 'special')->limit(2)->get();
+        return view('about-us', ['abouts' => $abouts, 'recipes' => $recipes, 'special' => $special]);
     }
 
     public function view()
@@ -20,7 +24,7 @@ class AboutController extends Controller
 
     public function create()
     {
-        return view('admin.About.create');
+        return view('admin.about.create');
     }
 
     public function store(Request $request)
@@ -41,6 +45,58 @@ class AboutController extends Controller
     $about->image_path = $imagePath; // Menyimpan path gambar
     $about->save();
 
-    return redirect()->route('admin.about')->with('success', 'Data and image uploaded successfully');
+    return redirect()->route('admin.about')->with('success', 'Data dan gambar berhasil diupload');
 }
+
+public function edit($id)
+{
+    $about = About::findOrFail($id);
+    return view('admin.About.edit', ['about' => $about]);
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string|max:10000',
+        'image_path' => 'required|mimes:jpeg,png,jpg,gif,svg|max:10000'
+    ]);
+
+    $about = About::findOrFail($id);
+
+    // Update data
+    $about->title = $request->title;
+    $about->content = $request->content;
+
+    // Handle image update
+    if ($request->hasFile('image_path')) {
+        // Delete old image
+        if ($about->image_path && Storage::exists('images/about' . $about->image_path)) {
+            Storage::delete('public/' . $about->image_path);
+        }
+
+        // Store new image
+        $path = $request->file('image_path')->store('images/about');
+        $about->image_path = $path;
+    }
+
+    $about->save();
+
+    return redirect()->route('admin.about')->with('success', 'Halaman tentang kami berhasil diperbarui!');
+}
+
+    public function destroy($id)
+    {
+        $about = About::findOrFail($id);
+
+        // Hapus gambar dari penyimpanan
+        if ($about->image_path && Storage::exists('public/' . $about->image)) {
+            Storage::delete('public/' . $about->image_path);
+        }
+
+        // Hapus data dari database
+        $about->delete();
+
+        return redirect()->route('admin.about')->with('success', 'Data berhasil dihapus!');
+    }
 }

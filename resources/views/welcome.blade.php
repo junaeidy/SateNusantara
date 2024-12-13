@@ -10,11 +10,7 @@
           <div class="col-lg-6 hero-left">
               <h1 class="display-4 mb-5">We Love <br>Delicious Foods!</h1>
               <div class="mb-2">
-                  <a class="btn btn-primary btn-shadow btn-lg" href="#" role="button">Explore Menu</a>
-                  <a class="btn btn-icon btn-lg" href="https://player.vimeo.com/video/33110953" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
-                      <span class="lnr lnr-film-play"></span>
-                      Play Video
-                  </a>
+                  <a class="btn btn-primary btn-shadow btn-lg" href="{{url('menu')}}" role="button">Explore Menu</a>
               </div>
              
               <ul class="hero-info list-unstyled d-flex text-center mb-0">
@@ -68,9 +64,6 @@
   @include('components.menu')
   <!-- End of menu Section -->
   
-  <!-- Testimonial Section-->
-  @include('components.testimonial')
-  <!-- End of Testimonial Section-->
   
   <!-- Team Section -->
   @include('components.team')

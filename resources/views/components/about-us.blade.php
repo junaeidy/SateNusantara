@@ -22,24 +22,15 @@
                         <p>{{$about->content}}</p>
                         <h3 class="mt-5">Special Recipe</h3>
                         <div class="row">
+                            @foreach ($recipes as $recipe)
                             <div class="col-4">
                                 <a href="#" class="thumb-menu">
-                                    <img class="img-fluid img-cover" src="{{ asset('assets/img/hero-1.jpg')}}" />
-                                    <h6>Australian Organic Beef</h6>
+                                    <img class="img-fluid img-cover" src="{{ asset('storage/' .$recipe->image_path) }}" alt="">
+                                    <h6>{{$recipe->name}}</h6>
                                 </a>
                             </div>
-                            <div class="col-4">
-                                <a href="#" class="thumb-menu">
-                                    <img class="img-fluid img-cover" src="{{ asset('assets/img/hero-1.jpg')}}" />
-                                    <h6>Australian Organic Beef</h6>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="#" class="thumb-menu">
-                                    <img class="img-fluid img-cover" src="{{ asset('assets/img/hero-1.jpg')}}" />
-                                    <h6>Australian Organic Beef</h6>
-                                </a>
-                            </div>
+                            @endforeach
+                           
                         </div>
                     </div>
                 </div>

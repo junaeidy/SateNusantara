@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
-@section('title', 'About')
+@section('title', 'Menu')
 
-@section('header', 'About')
+@section('header', 'Menu')
 
 @section('content')
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">About Pages</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Menu Pages</h6>
         <div class="float-right">
-            <a href="{{ route('about.create') }}" class="btn btn-primary">New</a>
+            <a href="{{ route('menu.create') }}" class="btn btn-primary">New</a>
         </div>
     </div>
     <div class="card-body">
@@ -19,8 +19,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Head</th>
-                        <th>Content</th>
+                        <th>Name</th>
+                        <th>Category</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -28,25 +28,25 @@
                 <tfoot>
                     <tr>
                         <th>No</th>
-                        <th>Head</th>
-                        <th>Content</th>
+                        <th>Name</th>
+                        <th>Category</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                @foreach ($abouts as $key => $about)
+                @foreach ($menus as $key => $menu)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{$about->title}}</td>
-                        <td>{{$about->content}}</td>
-                        <td>@if ($about->image_path)
-                            <img src="{{ asset('storage/' .$about->image_path) }}" alt="{{ $about->title }}" width="100px">
+                        <td>{{$menu->name}}</td>
+                        <td class="text-uppercase">{{$menu->category}}</td>
+                        <td>@if ($menu->image_path)
+                            <img src="{{ asset('storage/' .$menu->image_path) }}" alt="{{ $menu->name }}" width="100px">
                         @endif
                         </td>
                         <td style="display: flex; gap: 10px; align-items: center;">
-                            <a href="{{route('about.edit', $about->id)}}" class="btn btn-warning">Edit</a> | 
-                            <form action="{{ route('about.destroy', $about->id) }}" method="POST" id="deleteForm">
+                            <a href="{{route('menu.edit', $menu->id)}}" class="btn btn-warning">Edit</a> | 
+                            <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" id="deleteForm">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger mt-3" id="deleteButton">Delete</button>

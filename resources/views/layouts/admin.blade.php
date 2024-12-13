@@ -33,7 +33,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-home"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">{{Auth::user()->name}}</div>
             </a>
@@ -42,11 +42,12 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{request()->is('admin/dashboard*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{route('admin.dashboard')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -55,32 +56,26 @@
             <div class="sidebar-heading">
                 Pages
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/home">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-            <li class="nav-item">
+            <li class="nav-item {{request()->is('admin/about*') ? 'active' : ''}}">
                 <a class="nav-link" href="{{route('admin.about')}}">
                     <i class="fas fa-fw fa-info-circle"></i>
                     <span>About</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">
+            <li class="nav-item {{request()->is('admin/team*') ? 'active' : ''}}">
+                <a class="nav-link" href="{{route('admin.team')}}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Team</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">
+            <li class="nav-item {{request()->is('admin/menu*') ? 'active' : ''}}">
+                <a class="nav-link" href="{{route('admin.menu')}}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Menu</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">
+            <li class="nav-item {{request()->is('admin/reservation*') ? 'active' : ''}}">
+                <a class="nav-link" href="{{route('admin.reservation')}}">
                     <i class="fas fa-fw fa-receipt"></i>
                     <span>Reservation</span>
                 </a>
@@ -236,7 +231,6 @@
             </div>
         </div>
     </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('assets/admin/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -260,6 +254,10 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('assets/admin/js/demo/datatables-demo.js')}}"></script>
 
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    @yield('js')
 </body>
 
 </html>
